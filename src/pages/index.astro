@@ -1,11 +1,11 @@
 ---
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-console.log(import.meta.env.GEMINI_API_KEY);
-const genAI = new GoogleGenerativeAI(import.meta.env.GEMINI_API_KEY);
+import Prompt from "../components/Prompt/Prompt.tsx";
+import ChoiceGroup from "../components/ChoiceGroup/ChoiceGroup.tsx";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 async function run() {
+  const genAI = new GoogleGenerativeAI(import.meta.env.GEMINI_API_KEY);
   // For text-only input, use the gemini-pro model
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
@@ -16,21 +16,21 @@ Track the player's progress and adjust the narrative accordingly, ensuring their
 Respond to player input in a natural and interactive way, seamlessly blending dark and humorous elements to create a dynamic and engaging tone.
 Output all responses in JSON format, including narrative text, available choices, and any relevant game state information, to ensure smooth integration with the front-end application.
 Additionally, consider the following:
-Explore interesting fantasy elements and themes, such as unique magic systems, mythical creatures, and political intrigue.
+Explore interesting fantasy elements and themes, such as unique magic systems, mythical creatures, and political intrigue. The story should take place in the Meow Wolf universe.
 IMPORTANT: return response in JSON format [{}]
 DO NOT INCLUDE BACKTICKS IN THE RESPONSE
 sample response: 
 {
-  "narrative": "You stand at the edge of a towering forest, the sunlight dappling through the canopy above. The air is thick with the scent of pine and wildflowers, and the sound of birdsong fills the air. What do you do?",
+  "narrative": "creative narrative here",
   "choices": [
     {
-      "text": "Step into the forest",
-      "next": "forest_entrance"
+      "text": "Choice 1",
+      "next": "choice_1"
     },
     {
-      "text": "Turn around and head back the way you came",
-      "next": "return_to_town"
-    }
+      "text": "Choice 2",
+      "next": "choice_2"
+    }x
   ]
 }
 `;
@@ -41,20 +41,39 @@ sample response:
 }
 
 const data = await run();
-const test = JSON.parse(data)
-console.log(test);
+const story = JSON.parse(data);
+// const story = {
+//   narrative:
+//     "You stand at the edge of a towering forest, the sunlight dappling through the canopy above. The air is thick with the scent of pine and wildflowers, and the sound of birdsong fills the air. What do you do?cre",
+//   choices: [
+//     {
+//       text: "Step into the forest",
+//       next: "forest_entrance",
+//     },
+//     {
+//       text: "Turn around and head back the way you came",
+//       next: "return_to_town",
+//     },
+//   ],
+// };
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Adventure Time!">
   <main>
-    <section>
-      {test.narrative}
-    </section>
-		{test.choices.map(choice => <button>{choice.text}</button>)}
+    <Prompt prompt={story.narrative} client:load />
+    <aside>
+      <ChoiceGroup choices={story.choices} client:load />
+      <!-- {(story.choices).map((choice) => <Choice choice={choice} client:load />)} -->
+    </aside>
   </main>
 </Layout>
 
 <style>
+  aside {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
   main {
     margin: auto;
     padding: 1rem;
