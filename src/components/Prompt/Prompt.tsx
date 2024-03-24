@@ -3,18 +3,19 @@ import React, { useEffect, useState } from 'react'
 import './Prompt.css'
 import { useStore } from '@nanostores/react';
 import { currentPrompt } from '../../stores/promptStore';
+import useInitialPrompt from '../../hooks/useInitialPrompt';
 
 interface Props {
   prompt: string
 }
-const Prompt = ({ prompt }: Props) => {
+const Prompt = () => {
+  useInitialPrompt()
   // read the store value with the `useStore` hook
   const $currentPrompt = useStore(currentPrompt);
-  useEffect(() => {
-    currentPrompt.set(prompt)
-  }, [])
+
+
   return (
-    <section>{$currentPrompt}</section>
+    <section>{$currentPrompt?.narrative}</section>
   )
 }
 
