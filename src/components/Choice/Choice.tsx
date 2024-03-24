@@ -1,7 +1,6 @@
 import React from 'react'
 import './Choice.css'
 import { currentPrompt } from '../../stores/promptStore';
-import { choiceStore } from '../../stores/choiceStore';
 import { useStore } from '@nanostores/react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
