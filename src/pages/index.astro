@@ -3,32 +3,38 @@ import Layout from "../layouts/Layout.astro";
 import Prompt from "../components/Prompt/Prompt.tsx";
 import ChoiceGroup from "../components/ChoiceGroup/ChoiceGroup.tsx";
 import PromptImage from "../components/PromptImage/PromptImage.tsx";
+import KeyInput from "../components/KeyInput/KeyInput";
+import GenreSelect from "../components/GenreSelect/GenreSelect";
 ---
 
 <Layout title="Adventure Time!">
   <main>
-    <!-- <PromptImage client:load /> -->
-    <Prompt client:load />
-    <aside>
-      <ChoiceGroup client:load />
-    </aside>
+    <h1>Welcome to Adventure Time!</h1>
+    <p>
+      1) In order to begin please enter your Gemini API Key. You can get one <a
+        href="ai.google.dev">here</a
+      >
+    </p>
+    <KeyInput client:load />
+    <GenreSelect client:load />
   </main>
 </Layout>
 
 <style>
-  aside {
-    display: flex;
-    justify-content: space-evenly;
+  a {
+    color: lightpink;
   }
 
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
+  p {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
   }
-  
+  main {
+    max-width: 400px;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    color: white;
+  }
 </style>

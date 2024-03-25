@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Prompt from "../components/Prompt/Prompt.tsx";
+import ChoiceGroup from "../components/ChoiceGroup/ChoiceGroup.tsx";
+import PromptImage from "../components/PromptImage/PromptImage.tsx";
+---
+
+<Layout title="Adventure Time!">
+  <main>
+    <!-- <PromptImage client:load /> -->
+    <Prompt client:load />
+    <aside>
+      <ChoiceGroup client:load />
+    </aside>
+  </main>
+</Layout>
+
+<style>
+  aside {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 800px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+</style>
