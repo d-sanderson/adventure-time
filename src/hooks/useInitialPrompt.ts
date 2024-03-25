@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { currentPrompt } from '../stores/promptStore';

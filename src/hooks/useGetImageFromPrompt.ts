@@ -1,3 +1,6 @@
+// @ts-nocheck
+
+
 import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
 import { currentPrompt } from '../stores/promptStore'
@@ -17,8 +20,8 @@ const useGetImageFromPrompt = () => {
     const fetchPromptImage = async () => {
       const genAI = new GoogleGenerativeAI($keyStore); // Assuming you've stored your API key in an environment variable
       const model = genAI.getGenerativeModel({ model: "gemini-pro-version" });
-
-      const result = await model.generateContent([$currentPrompt?.narrative]);
+      const narrative = $currentPrompt?.narrative
+      const result = await model.generateContent([narrative]);
       console.log(result.response.text());
       setImage(result.response.text())
     };

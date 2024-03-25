@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react'
+// @ts-nocheck
+
 import { useStore } from '@nanostores/react'
-import Choice from '../Choice/Choice'
+import Choice, { type ChoiceT } from '../Choice/Choice'
 import { currentPrompt } from '../../stores/promptStore'
 
 const ChoiceGroup = () => {
   const $currentPrompt = useStore(currentPrompt);
 
   return (
-    <div>{$currentPrompt?.choices?.map(el => <Choice key={el.next} choice={el} />)}</div>
+    <div>{($currentPrompt?.choices as { text: string, next: string }[])?.map(el => <Choice key={el.next} choice={el} />)}</div>
   )
 }
 

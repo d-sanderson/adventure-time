@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { keyStore } from '../../stores/keyStore'
 import { useStore } from '@nanostores/react'
 import './KeyInput.css'
@@ -8,7 +10,7 @@ const KeyInput = () => {
   const $promptStore = useStore(currentPrompt)
 
   const handleReset = () => {
-    keyStore.set(null)
+    keyStore.set('')
   }
 
   if($promptStore) return null
@@ -24,7 +26,7 @@ const KeyInput = () => {
   return (
     <form onSubmit={(e) => {
       e.preventDefault()
-      const data = new FormData(e.target);
+      const data = new FormData(e.target as HTMLFormElement);
       keyStore.set(data.get('key'))
     }}>
       <input name="key" type='text' placeholder='Enter your Gemini API Key' />

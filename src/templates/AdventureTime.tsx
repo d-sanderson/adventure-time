@@ -1,9 +1,7 @@
-import React from 'react'
 import ChoiceGroup from '../components/ChoiceGroup/ChoiceGroup'
 import Prompt from '../components/Prompt/Prompt'
 import { useStore } from '@nanostores/react'
 import { keyStore } from '../stores/keyStore'
-import { currentPrompt } from '../stores/promptStore'
 import { genreStore } from '../stores/genreStore'
 
 const AdventureTime = () => {

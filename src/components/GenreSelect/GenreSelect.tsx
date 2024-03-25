@@ -1,5 +1,4 @@
 import { useStore } from '@nanostores/react'
-import React from 'react'
 import { keyStore } from '../../stores/keyStore'
 import './GenreSelect.css'
 import Genre from '../Genre/Genre'
@@ -20,10 +19,10 @@ const GenreSelect = () => {
   ]
   if (!$keyStore || $genreStore) return null
 
-  if($keyStore && $genreStore && !$promptStore) return <p>Loading</p>
-  const handleClick = (e) => {
-    console.log(e.target.value)
-    genreStore.set(e.target.value)
+  if ($keyStore && $genreStore && !$promptStore) return <p>Loading</p>
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log((e.target as HTMLButtonElement).value)
+    genreStore.set((e.target as HTMLButtonElement).value)
   }
   return (
     <>
@@ -33,10 +32,7 @@ const GenreSelect = () => {
       </div>
 
       {$genreStore && <>
-      <p>You selected <span className='highlight'>{$genreStore}</span>. Is that correct?</p>
-      <button onClick={() => {
-        // window.location.href = '/adventure'
-      }}>Confirm?</button>
+        <p>You selected <span className='highlight'>{$genreStore}</span>. Is that correct?</p>
       </>}
     </>
   )

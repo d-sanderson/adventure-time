@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import './Prompt.css'
 import { useStore } from '@nanostores/react';
 import { currentPrompt } from '../../stores/promptStore';

@@ -1,3 +1,3 @@
 import { atom } from "nanostores";
 
-export const keyStore = atom(null);
+export const keyStore = atom('');
