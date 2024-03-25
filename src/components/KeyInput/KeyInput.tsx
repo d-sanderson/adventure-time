@@ -1,13 +1,18 @@
 import { keyStore } from '../../stores/keyStore'
 import { useStore } from '@nanostores/react'
 import './KeyInput.css'
+import { currentPrompt } from '../../stores/promptStore'
 
 const KeyInput = () => {
   const $keyStore = useStore(keyStore)
+  const $promptStore = useStore(currentPrompt)
 
   const handleReset = () => {
     keyStore.set(null)
   }
+
+  if($promptStore) return null
+
   if ($keyStore) {
     return (
       <>

@@ -7,7 +7,7 @@ const ChoiceGroup = () => {
   const $currentPrompt = useStore(currentPrompt);
 
   return (
-    <div>{$currentPrompt?.choices.map(el => <Choice key={el.next} choice={el} />)}</div>
+    <div>{$currentPrompt?.choices?.map(el => <Choice key={el.next} choice={el} />)}</div>
   )
 }
 
