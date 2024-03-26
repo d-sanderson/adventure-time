@@ -1,9 +1,10 @@
-import React from 'react'
 import './Choice.css'
 import { currentPrompt } from '../../stores/promptStore';
 import { useStore } from '@nanostores/react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { prompts } from '../../prompts';
+import { keyStore } from '../../stores/keyStore';
+import { genreStore } from '../../stores/genreStore';
 
 export interface ChoiceT {
   choice: {
@@ -14,11 +15,14 @@ export interface ChoiceT {
 const Choice = (props: ChoiceT) => {
   const { choice } = props
   const $currentPrompt = useStore(currentPrompt)
-  const genAI = new GoogleGenerativeAI(import.meta.env.PUBLIC_GEMINI_API_KEY);
+  const $keyStore = useStore(keyStore)
+  const $genreStore = useStore(genreStore)
+
+  const genAI = new GoogleGenerativeAI($keyStore);
 
   const fetchData = async (previousPrompt: string, choice: string) => {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    const prompt = prompts.choice(choice, previousPrompt)
+    const prompt = prompts.choice(choice, previousPrompt, $genreStore)
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
@@ -26,7 +30,7 @@ const Choice = (props: ChoiceT) => {
   };
 
   const handleClick = async () => {
-    const response = await fetchData($currentPrompt as string, choice.text)
+    const response = await fetchData($currentPrompt, choice.text)
     currentPrompt.set(JSON.parse(response))
   }
   return (

@@ -1,3 +1,3 @@
 import { atom } from "nanostores";
 
-export const currentPrompt = atom(null);
+export const currentPrompt = atom('');

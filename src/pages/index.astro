@@ -1,34 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Prompt from "../components/Prompt/Prompt.tsx";
-import ChoiceGroup from "../components/ChoiceGroup/ChoiceGroup.tsx";
-import PromptImage from "../components/PromptImage/PromptImage.tsx";
+import KeyInput from "../components/KeyInput/KeyInput";
+import GenreSelect from "../components/GenreSelect/GenreSelect";
+import AdventureTime from "../templates/AdventureTime";
+import Intro from "../components/Intro/Intro";
 ---
 
 <Layout title="Adventure Time!">
   <main>
-    <!-- <PromptImage client:load /> -->
-    <Prompt client:load />
-    <aside>
-      <ChoiceGroup client:load />
-    </aside>
+    <Intro client:load />
+    <KeyInput client:load />
+    <GenreSelect client:load />
+    <AdventureTime client:load />
   </main>
 </Layout>
 
 <style>
-  aside {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
   main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
+    max-width: 540px;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
     color: white;
-    font-size: 20px;
-    line-height: 1.6;
   }
-  
 </style>
