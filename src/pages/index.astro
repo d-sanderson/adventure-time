@@ -1,136 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Prompt from "../components/Prompt/Prompt.tsx";
-import ChoiceGroup from "../components/ChoiceGroup/ChoiceGroup.tsx";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-async function run() {
-  const genAI = new GoogleGenerativeAI(import.meta.env.GEMINI_API_KEY);
-  // For text-only input, use the gemini-pro model
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-  const prompt = `You are now an API for a text-based choose your own adventure game that returns JSON responses. You will respond with absolutely nothing but valid JSON. The game will be set in a fantasy world inspired by authors like Brandon Sanderson, offering a rich and immersive experience. You will use your knowledge and language capabilities to:
-Generate engaging and descriptive narrative passages, transporting the player to fantastical locations and immersing them in the story.
-Offer the player meaningful choices that impact the story's direction, including moral dilemmas, exploration options, and combat decisions.
-Track the player's progress and adjust the narrative accordingly, ensuring their choices have lasting consequences.
-Respond to player input in a natural and interactive way, seamlessly blending dark and humorous elements to create a dynamic and engaging tone.
-Output all responses in JSON format, including narrative text, available choices, and any relevant game state information, to ensure smooth integration with the front-end application.
-Additionally, consider the following:
-Explore interesting fantasy elements and themes, such as unique magic systems, mythical creatures, and political intrigue. The story should take place in the Meow Wolf universe.
-IMPORTANT: return response in JSON format [{}]
-DO NOT INCLUDE BACKTICKS IN THE RESPONSE
-sample response: 
-{
-  "narrative": "creative narrative here",
-  "choices": [
-    {
-      "text": "Choice 1",
-      "next": "choice_1"
-    },
-    {
-      "text": "Choice 2",
-      "next": "choice_2"
-    }x
-  ]
-}
-`;
-
-  const result = await model.generateContent(prompt);
-  const response = await result.response.text();
-  return response;
-}
-
-const data = await run();
-const story = JSON.parse(data);
-// const story = {
-//   narrative:
-//     "You stand at the edge of a towering forest, the sunlight dappling through the canopy above. The air is thick with the scent of pine and wildflowers, and the sound of birdsong fills the air. What do you do?cre",
-//   choices: [
-//     {
-//       text: "Step into the forest",
-//       next: "forest_entrance",
-//     },
-//     {
-//       text: "Turn around and head back the way you came",
-//       next: "return_to_town",
-//     },
-//   ],
-// };
+import KeyInput from "../components/KeyInput/KeyInput";
+import GenreSelect from "../components/GenreSelect/GenreSelect";
+import AdventureTime from "../templates/AdventureTime";
+import Intro from "../components/Intro/Intro";
 ---
 
 <Layout title="Adventure Time!">
   <main>
-    <Prompt prompt={story.narrative} client:load />
-    <aside>
-      <ChoiceGroup choices={story.choices} client:load />
-      <!-- {(story.choices).map((choice) => <Choice choice={choice} client:load />)} -->
-    </aside>
+    <Intro client:load />
+    <KeyInput client:load />
+    <GenreSelect client:load />
+    <AdventureTime client:load />
   </main>
 </Layout>
 
 <style>
-  aside {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
   main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  .astro-a {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 220px;
-    height: auto;
-    z-index: -1;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-      rgba(var(--accent-dark), 66%),
-      rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent-light));
-  }
-  .link-card-grid {
+    max-width: 540px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
+    place-items: center;
+    color: white;
   }
 </style>

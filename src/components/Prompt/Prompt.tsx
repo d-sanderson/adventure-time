@@ -1,20 +1,17 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import React, { useEffect, useState } from 'react'
+// @ts-nocheck
+
 import './Prompt.css'
 import { useStore } from '@nanostores/react';
 import { currentPrompt } from '../../stores/promptStore';
+import useInitialPrompt from '../../hooks/useInitialPrompt';
 
-interface Props {
-  prompt: string
-}
-const Prompt = ({ prompt }: Props) => {
-  // read the store value with the `useStore` hook
-  const $currentPrompt = useStore(currentPrompt);
-  useEffect(() => {
-    currentPrompt.set(prompt)
-  }, [])
+const Prompt = () => {
+  useInitialPrompt()
+  const $currentPrompt = useStore(currentPrompt)
+  const narrative: string | undefined = $currentPrompt?.narrative
+
   return (
-    <section>{$currentPrompt}</section>
+    <section>{narrative}</section>
   )
 }
 
