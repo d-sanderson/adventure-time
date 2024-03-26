@@ -17,9 +17,9 @@ const GenreSelect = () => {
     'Feudal Japan',
     'Meow Wolf'
   ]
-  if (!$keyStore || $genreStore) return null
+  if ($promptStore || !$keyStore) return null
 
-  if ($keyStore && $genreStore && !$promptStore) return <p>Loading</p>
+  if ($keyStore && $genreStore && !$promptStore) return <p>Loading your story in set in {$genreStore}...</p>
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log((e.target as HTMLButtonElement).value)
     genreStore.set((e.target as HTMLButtonElement).value)
@@ -30,10 +30,6 @@ const GenreSelect = () => {
       <div>
         {genres.map(genre => <Genre key={genre} onClick={handleClick} title={genre} />)}
       </div>
-
-      {$genreStore && <>
-        <p>You selected <span className='highlight'>{$genreStore}</span>. Is that correct?</p>
-      </>}
     </>
   )
 }
