@@ -16,7 +16,7 @@ const useInitialPrompt = () => {
     const fetchInitialPrompt = async () => {
       const genAI = new GoogleGenerativeAI($keyStore); // Assuming you've stored your API key in an environment variable
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContent(prompts.initial2($genreStore));
+      const result = await model.generateContent(prompts.initial($genreStore));
       const response = await result.response.text();
       const formattedResponse = JSON.parse(response)
       currentPrompt.set(formattedResponse)

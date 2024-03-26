@@ -17,7 +17,7 @@ const Intro = () => {
       </p>
       <p>
         1) In order to begin please enter your Gemini API Key. You can get one <a
-          href="ai.google.dev">here</a>
+          href="https://www.ai.google.dev" target="_blank">here</a>
       </p>
     </>
   )
