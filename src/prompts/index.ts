@@ -6,7 +6,7 @@ Track the player's progress and adjust the narrative accordingly, ensuring their
 Respond to player input in a natural and interactive way, seamlessly blending dark and humorous elements to create a dynamic and engaging tone.
 Output all responses in JSON format, including narrative text, available choices, and any relevant game state information, to ensure smooth integration with the front-end application.
 Additionally, consider the following:
-Explore interesting elements and themes specific to the ${genre}, and political intrigue. The story should take place in the ${genre} universe.
+Explore interesting elements and themes specific to the ${genre}, and political intrigue. The story should take place in the ${genre} universe. It is vital that you keep track of players previous choices to preserve story continuity and create an immersive adventure for the player.
 IMPORTANT: return response in JSON format [{}]
 DO NOT INCLUDE BACKTICKS IN THE RESPONSE
 sample response: 
@@ -24,12 +24,12 @@ sample response:
   ]
 }
 `,
-  choice: (choice: string, previousPrompt: string, genre: string) => `The player selected ${choice}. Continue the telling the story, the last prompt was ${previousPrompt}. Return at least 4 choices. Continue the story and remember that it takes place in the ${genre} universe.
-    Explore interesting fantasy elements and themes, such as unique magic systems, mythical creatures, and political intrigue.
-    
+  choice: (choice: string, previousPrompt: string, genre: string) => `The player selected ${choice}. Continue the telling the story, the last prompt was ${previousPrompt}. Return at least 4 choices. Continue the story and remember that it takes place in the ${genre} universe.  
+    Explore interesting elements and themes specific to the players current world: ${genre}, and political intrigue. It is vital that you keep track of players previous choices to preserve story continuity and create an immersive adventure for the player.
+
 IMPORTANT: return response in JSON format [{}]
 DO NOT INCLUDE BACKTICKS IN THE RESPONSE
-sample response: 
+sample response:
 {
   "narrative": "creative narrative here",
   "choices": [
