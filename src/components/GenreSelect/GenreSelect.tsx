@@ -15,11 +15,13 @@ const GenreSelect = () => {
     'Fantasy',
     'Middle Earth',
     'Feudal Japan',
-    'Meow Wolf'
+    'Meow Wolf',
+    'Space Opera',
+    'King of the Hill'
   ]
   if ($promptStore || !$keyStore) return null
 
-  if ($keyStore && $genreStore && !$promptStore) return <p>Loading your story in set in {$genreStore}...</p>
+  if ($keyStore && $genreStore && !$promptStore) return <p>Loading your story in set in <span className='highlight'>{$genreStore}</span>...</p>
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log((e.target as HTMLButtonElement).value)
     genreStore.set((e.target as HTMLButtonElement).value)
