@@ -16,8 +16,8 @@ const GenreSelect = () => {
     'Middle Earth',
     'Feudal Japan',
     'Space Opera',
-    'King of the Hill'
   ]
+
   if ($promptStore || !$keyStore) return null
 
   if ($keyStore && $genreStore && !$promptStore) return <p>Loading your story in set in <span className='highlight'>{$genreStore}</span>...</p>
