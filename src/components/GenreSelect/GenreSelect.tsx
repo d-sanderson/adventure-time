@@ -15,7 +15,6 @@ const GenreSelect = () => {
     'Fantasy',
     'Middle Earth',
     'Feudal Japan',
-    'Meow Wolf',
     'Space Opera',
     'King of the Hill'
   ]
@@ -31,6 +30,14 @@ const GenreSelect = () => {
       <p>2. Select a genre for your adventure</p>
       <div>
         {genres.map(genre => <Genre key={genre} onClick={handleClick} title={genre} />)}
+        <form onSubmit={(e) => {
+          e.preventDefault()
+          const form = new FormData(e.target)
+          genreStore.set(form.get('custom-genre'))
+        }}>
+        <input name="custom-genre" type='text' placeholder='pick your own' />
+        <button type='submit'>+</button>
+        </form>
       </div>
     </>
   )
